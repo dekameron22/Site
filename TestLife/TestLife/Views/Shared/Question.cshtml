@@ -1,0 +1,21 @@
+﻿@model TestLife.Models.Question
+
+<div style="border-top: 1px grey solid">
+    @Html.DisplayFor(x=>x.Question1)
+
+    @if(Model.Answers.Count(a=>a.IsCorrect) > 1)
+    {
+        foreach (var answer in Model.Answers)
+        {
+            @Html.CheckBox(answer.Answer1);
+        }
+    }
+    else
+    {
+        foreach (var answer in Model.Answers)
+        {
+            @Html.RadioButton(answer.Answer1, answer.Answer1);
+        }          
+    }
+    }
+</div>

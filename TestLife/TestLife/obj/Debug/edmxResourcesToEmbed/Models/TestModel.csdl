@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestsDbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TestsDbEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Answers" EntityType="TestsDbModel.Answer" />
+    <EntitySet Name="Questions" EntityType="TestsDbModel.Question" />
+    <EntitySet Name="Statistics" EntityType="TestsDbModel.Statistic" />
+    <EntitySet Name="TestsTables" EntityType="TestsDbModel.TestsTable" />
+    <EntitySet Name="Users" EntityType="TestsDbModel.User" />
+    <AssociationSet Name="FK_Answers_ToTable" Association="TestsDbModel.FK_Answers_ToTable">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="Answers" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Questions_ToTable" Association="TestsDbModel.FK_Questions_ToTable">
+      <End Role="TestsTable" EntitySet="TestsTables" />
+      <End Role="Questions" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stat_ToTests" Association="TestsDbModel.FK_Stat_ToTests">
+      <End Role="TestsTable" EntitySet="TestsTables" />
+      <End Role="Statistics" EntitySet="Statistics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Statistics_Tousers" Association="TestsDbModel.FK_Statistics_Tousers">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Statistics" EntitySet="Statistics" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Answer">
+    <Key>
+      <PropertyRef Name="QId" />
+      <PropertyRef Name="Answer1" />
+      <PropertyRef Name="IsCorrect" />
+    </Key>
+    <Property Name="QId" Type="Int32" Nullable="false" />
+    <Property Name="Answer1" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="IsCorrect" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Question" Relationship="TestsDbModel.FK_Answers_ToTable" FromRole="Answers" ToRole="Questions" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TestId" Type="Int32" Nullable="false" />
+    <Property Name="Question1" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="Answers" Relationship="TestsDbModel.FK_Answers_ToTable" FromRole="Questions" ToRole="Answers" />
+    <NavigationProperty Name="TestsTable" Relationship="TestsDbModel.FK_Questions_ToTable" FromRole="Questions" ToRole="TestsTable" />
+  </EntityType>
+  <EntityType Name="Statistic">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="TestId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Int32" Nullable="false" />
+    <Property Name="Correct" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TestsTable" Relationship="TestsDbModel.FK_Stat_ToTests" FromRole="Statistics" ToRole="TestsTable" />
+    <NavigationProperty Name="User" Relationship="TestsDbModel.FK_Statistics_Tousers" FromRole="Statistics" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="TestsTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="Questions" Relationship="TestsDbModel.FK_Questions_ToTable" FromRole="TestsTable" ToRole="Questions" />
+    <NavigationProperty Name="Statistics" Relationship="TestsDbModel.FK_Stat_ToTests" FromRole="TestsTable" ToRole="Statistics" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="Statistics" Relationship="TestsDbModel.FK_Statistics_Tousers" FromRole="Users" ToRole="Statistics" />
+  </EntityType>
+  <Association Name="FK_Answers_ToTable">
+    <End Role="Questions" Type="TestsDbModel.Question" Multiplicity="1" />
+    <End Role="Answers" Type="TestsDbModel.Answer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="QId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Questions_ToTable">
+    <End Role="TestsTable" Type="TestsDbModel.TestsTable" Multiplicity="1" />
+    <End Role="Questions" Type="TestsDbModel.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TestsTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stat_ToTests">
+    <End Role="TestsTable" Type="TestsDbModel.TestsTable" Multiplicity="1" />
+    <End Role="Statistics" Type="TestsDbModel.Statistic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TestsTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Statistics">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Statistics_Tousers">
+    <End Role="Users" Type="TestsDbModel.User" Multiplicity="1" />
+    <End Role="Statistics" Type="TestsDbModel.Statistic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Statistics">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestsDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TestsDbModelStoreContainer">
+    <EntitySet Name="Answers" EntityType="TestsDbModel.Store.Answers" store:Type="Tables" store:Schema="dbo" store:Name="Answers">
+      <DefiningQuery>SELECT 
+      [Answers].[QId] AS [QId], 
+      [Answers].[Answer] AS [Answer], 
+      [Answers].[IsCorrect] AS [IsCorrect]
+      FROM [dbo].[Answers] AS [Answers]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Questions" EntityType="TestsDbModel.Store.Questions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Statistics" EntityType="TestsDbModel.Store.Statistics" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TestsTable" EntityType="TestsDbModel.Store.TestsTable" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="TestsDbModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Answers_ToTable" Association="TestsDbModel.Store.FK_Answers_ToTable">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="Answers" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Questions_ToTable" Association="TestsDbModel.Store.FK_Questions_ToTable">
+      <End Role="TestsTable" EntitySet="TestsTable" />
+      <End Role="Questions" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stat_ToTests" Association="TestsDbModel.Store.FK_Stat_ToTests">
+      <End Role="TestsTable" EntitySet="TestsTable" />
+      <End Role="Statistics" EntitySet="Statistics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Statistics_Tousers" Association="TestsDbModel.Store.FK_Statistics_Tousers">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Statistics" EntitySet="Statistics" />
+    </AssociationSet>
+  </EntityContainer>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'C:\USERS\1\DESKTOP\TESTLIFE\TESTLIFE\APP_DATA\TESTSDB.MDF.dbo.Answers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="Answers">
+    <Key>
+      <PropertyRef Name="QId" />
+      <PropertyRef Name="Answer" />
+      <PropertyRef Name="IsCorrect" />
+    </Key>
+    <Property Name="QId" Type="int" Nullable="false" />
+    <Property Name="Answer" Type="nchar" Nullable="false" MaxLength="10" />
+    <Property Name="IsCorrect" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Questions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TestId" Type="int" Nullable="false" />
+    <Property Name="Question" Type="nchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Statistics">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="TestId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Total" Type="int" Nullable="false" />
+    <Property Name="Correct" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TestsTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="nchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Answers_ToTable">
+    <End Role="Questions" Type="TestsDbModel.Store.Questions" Multiplicity="1" />
+    <End Role="Answers" Type="TestsDbModel.Store.Answers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="QId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Questions_ToTable">
+    <End Role="TestsTable" Type="TestsDbModel.Store.TestsTable" Multiplicity="1" />
+    <End Role="Questions" Type="TestsDbModel.Store.Questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TestsTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stat_ToTests">
+    <End Role="TestsTable" Type="TestsDbModel.Store.TestsTable" Multiplicity="1" />
+    <End Role="Statistics" Type="TestsDbModel.Store.Statistics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TestsTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Statistics">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Statistics_Tousers">
+    <End Role="Users" Type="TestsDbModel.Store.Users" Multiplicity="1" />
+    <End Role="Statistics" Type="TestsDbModel.Store.Statistics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Statistics">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

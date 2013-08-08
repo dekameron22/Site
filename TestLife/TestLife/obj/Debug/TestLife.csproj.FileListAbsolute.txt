@@ -1,0 +1,54 @@
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\TestLife.dll
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\TestLife.pdb
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\Microsoft.Web.Infrastructure.dll
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\Newtonsoft.Json.dll
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Net.Http.Formatting.dll
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.Helpers.dll
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.Http.dll
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.Http.WebHost.dll
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.Mvc.dll
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.Razor.dll
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.WebPages.Deployment.dll
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.WebPages.dll
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.WebPages.Razor.dll
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\Newtonsoft.Json.xml
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Net.Http.Formatting.xml
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.Helpers.xml
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.Http.xml
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.Http.WebHost.xml
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.Mvc.xml
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.Razor.xml
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.WebPages.xml
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.WebPages.Deployment.xml
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\bin\System.Web.WebPages.Razor.xml
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\obj\Debug\TestLife.csprojResolveAssemblyReference.cache
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\obj\Debug\TestLife.dll
+c:\users\1\documents\visual studio 2012\Projects\TestLife\TestLife\obj\Debug\TestLife.pdb
+C:\Users\1\Desktop\TestLife\TestLife\bin\TestLife.dll
+C:\Users\1\Desktop\TestLife\TestLife\bin\TestLife.pdb
+C:\Users\1\Desktop\TestLife\TestLife\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\1\Desktop\TestLife\TestLife\bin\Newtonsoft.Json.dll
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Net.Http.Formatting.dll
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.Helpers.dll
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.Http.dll
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.Http.WebHost.dll
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.Mvc.dll
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.Razor.dll
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.WebPages.Deployment.dll
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.WebPages.dll
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.WebPages.Razor.dll
+C:\Users\1\Desktop\TestLife\TestLife\bin\Newtonsoft.Json.xml
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Net.Http.Formatting.xml
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.Helpers.xml
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.Http.xml
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.Http.WebHost.xml
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.Mvc.xml
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.Razor.xml
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.WebPages.xml
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.WebPages.Deployment.xml
+C:\Users\1\Desktop\TestLife\TestLife\bin\System.Web.WebPages.Razor.xml
+C:\Users\1\Desktop\TestLife\TestLife\obj\Debug\TestLife.csprojResolveAssemblyReference.cache
+C:\Users\1\Desktop\TestLife\TestLife\obj\Debug\TestLife.dll
+C:\Users\1\Desktop\TestLife\TestLife\obj\Debug\TestLife.pdb
+C:\Users\1\Desktop\TestLife\TestLife\bin\EntityFramework.dll
+C:\Users\1\Desktop\TestLife\TestLife\bin\EntityFramework.xml

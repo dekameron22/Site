@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TestsDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="TestsDbModelStoreContainer">
+          <EntitySet Name="Answers" EntityType="TestsDbModel.Store.Answers" store:Type="Tables" store:Schema="dbo" store:Name="Answers">
+            <DefiningQuery>SELECT 
+      [Answers].[QId] AS [QId], 
+      [Answers].[Answer] AS [Answer], 
+      [Answers].[IsCorrect] AS [IsCorrect]
+      FROM [dbo].[Answers] AS [Answers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Questions" EntityType="TestsDbModel.Store.Questions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Statistics" EntityType="TestsDbModel.Store.Statistics" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TestsTable" EntityType="TestsDbModel.Store.TestsTable" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="TestsDbModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Answers_ToTable" Association="TestsDbModel.Store.FK_Answers_ToTable">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_ToTable" Association="TestsDbModel.Store.FK_Questions_ToTable">
+            <End Role="TestsTable" EntitySet="TestsTable" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stat_ToTests" Association="TestsDbModel.Store.FK_Stat_ToTests">
+            <End Role="TestsTable" EntitySet="TestsTable" />
+            <End Role="Statistics" EntitySet="Statistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Statistics_Tousers" Association="TestsDbModel.Store.FK_Statistics_Tousers">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Statistics" EntitySet="Statistics" />
+          </AssociationSet>
+        </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'C:\USERS\1\DESKTOP\TESTLIFE\TESTLIFE\APP_DATA\TESTSDB.MDF.dbo.Answers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Answers">
+          <Key>
+            <PropertyRef Name="QId" />
+            <PropertyRef Name="Answer" />
+            <PropertyRef Name="IsCorrect" />
+          </Key>
+          <Property Name="QId" Type="int" Nullable="false" />
+          <Property Name="Answer" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="IsCorrect" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TestId" Type="int" Nullable="false" />
+          <Property Name="Question" Type="nchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Statistics">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TestId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Total" Type="int" Nullable="false" />
+          <Property Name="Correct" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestsTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Answers_ToTable">
+          <End Role="Questions" Type="TestsDbModel.Store.Questions" Multiplicity="1" />
+          <End Role="Answers" Type="TestsDbModel.Store.Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="QId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_ToTable">
+          <End Role="TestsTable" Type="TestsDbModel.Store.TestsTable" Multiplicity="1" />
+          <End Role="Questions" Type="TestsDbModel.Store.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestsTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stat_ToTests">
+          <End Role="TestsTable" Type="TestsDbModel.Store.TestsTable" Multiplicity="1" />
+          <End Role="Statistics" Type="TestsDbModel.Store.Statistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestsTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Statistics">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Statistics_Tousers">
+          <End Role="Users" Type="TestsDbModel.Store.Users" Multiplicity="1" />
+          <End Role="Statistics" Type="TestsDbModel.Store.Statistics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Statistics">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestsDbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TestsDbEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Answers" EntityType="TestsDbModel.Answer" />
+          <EntitySet Name="Questions" EntityType="TestsDbModel.Question" />
+          <EntitySet Name="Statistics" EntityType="TestsDbModel.Statistic" />
+          <EntitySet Name="TestsTables" EntityType="TestsDbModel.TestsTable" />
+          <EntitySet Name="Users" EntityType="TestsDbModel.User" />
+          <AssociationSet Name="FK_Answers_ToTable" Association="TestsDbModel.FK_Answers_ToTable">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Answers" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_ToTable" Association="TestsDbModel.FK_Questions_ToTable">
+            <End Role="TestsTable" EntitySet="TestsTables" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stat_ToTests" Association="TestsDbModel.FK_Stat_ToTests">
+            <End Role="TestsTable" EntitySet="TestsTables" />
+            <End Role="Statistics" EntitySet="Statistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Statistics_Tousers" Association="TestsDbModel.FK_Statistics_Tousers">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Statistics" EntitySet="Statistics" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="QId" />
+            <PropertyRef Name="Answer1" />
+            <PropertyRef Name="IsCorrect" />
+          </Key>
+          <Property Name="QId" Type="Int32" Nullable="false" />
+          <Property Name="Answer1" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="IsCorrect" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Question" Relationship="TestsDbModel.FK_Answers_ToTable" FromRole="Answers" ToRole="Questions" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TestId" Type="Int32" Nullable="false" />
+          <Property Name="Question1" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Answers" Relationship="TestsDbModel.FK_Answers_ToTable" FromRole="Questions" ToRole="Answers" />
+          <NavigationProperty Name="TestsTable" Relationship="TestsDbModel.FK_Questions_ToTable" FromRole="Questions" ToRole="TestsTable" />
+        </EntityType>
+        <EntityType Name="Statistic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TestId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Int32" Nullable="false" />
+          <Property Name="Correct" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TestsTable" Relationship="TestsDbModel.FK_Stat_ToTests" FromRole="Statistics" ToRole="TestsTable" />
+          <NavigationProperty Name="User" Relationship="TestsDbModel.FK_Statistics_Tousers" FromRole="Statistics" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="TestsTable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Questions" Relationship="TestsDbModel.FK_Questions_ToTable" FromRole="TestsTable" ToRole="Questions" />
+          <NavigationProperty Name="Statistics" Relationship="TestsDbModel.FK_Stat_ToTests" FromRole="TestsTable" ToRole="Statistics" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Statistics" Relationship="TestsDbModel.FK_Statistics_Tousers" FromRole="Users" ToRole="Statistics" />
+        </EntityType>
+        <Association Name="FK_Answers_ToTable">
+          <End Role="Questions" Type="TestsDbModel.Question" Multiplicity="1" />
+          <End Role="Answers" Type="TestsDbModel.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Answers">
+              <PropertyRef Name="QId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_ToTable">
+          <End Role="TestsTable" Type="TestsDbModel.TestsTable" Multiplicity="1" />
+          <End Role="Questions" Type="TestsDbModel.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestsTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stat_ToTests">
+          <End Role="TestsTable" Type="TestsDbModel.TestsTable" Multiplicity="1" />
+          <End Role="Statistics" Type="TestsDbModel.Statistic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestsTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Statistics">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Statistics_Tousers">
+          <End Role="Users" Type="TestsDbModel.User" Multiplicity="1" />
+          <End Role="Statistics" Type="TestsDbModel.Statistic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Statistics">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestsDbModelStoreContainer" CdmEntityContainer="TestsDbEntities">
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="TestsDbModel.Answer">
+              <MappingFragment StoreEntitySet="Answers">
+                <ScalarProperty Name="QId" ColumnName="QId" />
+                <ScalarProperty Name="Answer1" ColumnName="Answer" />
+                <ScalarProperty Name="IsCorrect" ColumnName="IsCorrect" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="TestsDbModel.Question">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="Question1" ColumnName="Question" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statistics">
+            <EntityTypeMapping TypeName="TestsDbModel.Statistic">
+              <MappingFragment StoreEntitySet="Statistics">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Correct" ColumnName="Correct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestsTables">
+            <EntityTypeMapping TypeName="TestsDbModel.TestsTable">
+              <MappingFragment StoreEntitySet="TestsTable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TestsDbModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

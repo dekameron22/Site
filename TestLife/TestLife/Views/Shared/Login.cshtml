@@ -1,0 +1,28 @@
+﻿@model TestLife.Models.LoginModel
+
+<h2 class="title1">Authentication</h2>
+@using(Html.BeginForm("login","Account"))
+{
+    <fieldset title="Login">
+        <legend>Enter pasword</legend>
+        @Html.LabelFor(x => x.Login)
+        <br>
+        @Html.EditorFor(x => x.Login)
+        <br>
+
+        @Html.LabelFor(x => x.Password)
+        <br>
+        @Html.EditorFor(x => x.Password)
+        <br>
+
+        @Html.LabelFor(x => x.Remember)
+        @Html.EditorFor(x => x.Remember)
+        <br>
+        <input id="loginbtn" type="submit" value="Login" />
+    </fieldset>
+    
+    if (Session["Error"] != null)
+    {
+        <div style="color: red; margin-top: 10px">@Session["Error"].ToString()</div>
+    }
+}

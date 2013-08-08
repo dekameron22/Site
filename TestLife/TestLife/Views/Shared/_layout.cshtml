@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Title      : Travel Portal
+Version    : 1.0
+Released   : 20070618
+Description: A two-column, fixed-width template.
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Test portal</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="~/Content/default.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/smoothness/jquery-ui-1.10.3.custom.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.5.3.js"></script>
+    <script src="~/Scripts/_references.js"></script>
+    <script src="~/Scripts/jquery-1.7.1.intellisense.js"></script>
+    <script src="~/Scripts/jquery-1.7.1.js"></script>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.js"></script>
+    <script src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.20.min.js"></script>
+    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/knockout-2.1.0.debug.js"></script>
+    <script src="~/Scripts/knockout-2.1.0.js"></script>
+</head>
+<body>
+    <header>
+         <div style="height:0px"/>
+     </header>
+    <div id="page">
+        <div id="sidebar">
+            <div id="logo">
+                <h1><a href="http://www.free-css.com/">Test Portal</a></h1>
+            </div>
+            <!-- end header -->
+            <div id="menu">
+                <ul>
+                    <li class="first">
+                        @Html.ActionLink("Home", "Index", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Testing", "Index", "Test")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Statistics", "Index", "Statistics")
+                    </li>
+                    <li>
+                        @Html.ActionLink("About", "Index", "About")
+                    </li>
+                </ul>
+            </div>
+            <!-- end menu -->
+            <div id="login">
+                @if (Session["user"] != null)
+                {
+                    <div>Hello @Session["user"].ToString()</div>
+                    @Html.ActionLink("Log out", "LogOut", "Account")
+                }
+                else
+                {
+                    @Html.Partial("Login")
+                }
+            </div>
+        </div>
+        <!-- end sidebar -->
+        <div id="content">
+            <div>
+                <img src="~/Content/images/img08.jpg" alt="" width="740" height="220" />
+            </div>
+
+            @RenderBody()
+        </div>
+        <!-- end content -->
+        <div style="clear: both;">&nbsp;</div>
+
+    </div>
+    <!-- end page -->
+    <div id="footer">
+        <p id="legal">Copyright &copy; @DateTime.Now.Year Artem Tkachukl. All Rights Reserved. Designed by <a href="Lol">Artem Tkachuk</a>.</p>
+    </div>
+</body>
+</html>
